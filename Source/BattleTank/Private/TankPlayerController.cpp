@@ -18,3 +18,8 @@ void ATankPlayerController::BeginPlay() {
 		UE_LOG(LogTemp,Warning,TEXT("Hello from Player Controller begin play"))
 	UE_LOG(LogTemp, Warning, TEXT("Hello from %s pawn"),*ControlledTank->GetName())
 }
+
+void ATankPlayerController::Tick(float DeltaTime) {
+	Super::Tick(DeltaTime);
+	UE_LOG(LogTemp, Warning, TEXT("Ticking PlayerController"))
+}
