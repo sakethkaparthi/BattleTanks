@@ -3,10 +3,10 @@
 #pragma once
 #include "TankAimingComponent.h"
 #include "TankBarrel.h"
+#include "TankTurret.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"
-
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -29,6 +29,9 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	UFUNCTION(BlueprintCallable,Category = Setup)
 	void SetBarrelReference(UTankBarrel* BarrelToSet);
+
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void SetTurretReference(UTankTurret* TurretToSet);
 
 	UPROPERTY(EditAnywhere, Category = Firing)
 	float LaunchSpeed = 100000;
