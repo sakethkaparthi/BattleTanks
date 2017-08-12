@@ -41,7 +41,7 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector & HitResultOut) const
 	FVector CameraWorldLocation;
 	FVector WorldDirection;
 	if (DeprojectScreenPositionToWorld(ScreenLocation.X, ScreenLocation.Y, CameraWorldLocation, WorldDirection)) {
-		GetLookVectorHitLocation(WorldDirection,HitResultOut);
+		return GetLookVectorHitLocation(WorldDirection,HitResultOut);
 	}
 		
 	return true;
