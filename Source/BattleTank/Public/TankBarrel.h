@@ -24,6 +24,4 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = Setup)
 	float MinElevationDegrees = 0.0f;
-
-	
 };
