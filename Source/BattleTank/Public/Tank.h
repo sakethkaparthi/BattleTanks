@@ -7,7 +7,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"
-
+class AProjectile;
 UCLASS()
 class BATTLETANK_API ATank : public APawn
 {
@@ -38,4 +38,9 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = Firing)
 	float LaunchSpeed = 4500;
+
+	UPROPERTY(EditAnywhere, Category = Setup)
+	TSubclassOf<AProjectile> ProjectileBlueprint;
+
+	UTankBarrel* Barrel = nullptr;
 };
