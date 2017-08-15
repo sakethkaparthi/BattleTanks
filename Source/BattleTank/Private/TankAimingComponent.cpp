@@ -58,11 +58,9 @@ void UTankAimingComponent::AimAt(FVector HitLocation,float LaunchSpeed)
 		)
 	{
 		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
-		//UE_LOG(LogTemp, Warning, TEXT("Aiming at %s"), *AimDirection.ToString())
 		MoveBarrel(AimDirection);
 	}
 	else {
-		//UE_LOG(LogTemp, Warning, TEXT("No Aim solution found"))
 		return;
 	}
 }
