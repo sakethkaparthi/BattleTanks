@@ -25,7 +25,10 @@ void UTankMovementComponent::RequestDirectMove(const FVector &MoveVelocity, bool
 	UE_LOG(LogTemp, Warning, TEXT("%s Request Direct move"), *GetOwner()->GetName());
 	auto TankForward = GetOwner()->GetActorForwardVector().GetSafeNormal();
 	auto AIForwardIntention = MoveVelocity.GetSafeNormal();
-	
+	//How much to move along the local x axis to be parallel to the player tank 
 	auto Throw = FVector::DotProduct(TankForward, AIForwardIntention);
 	IntendMoveForward(Throw);
+
+	auto RightThrow = FVector::CrossProduct(TankForward, AIForwardIntention).Z;
+	IntendTurnRight(RightThrow);
 }
