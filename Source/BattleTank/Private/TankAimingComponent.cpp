@@ -1,7 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankAimingComponent.h"
-#include "TankBarrel.h"
 #include "Classes/Kismet/GameplayStatics.h"
 #include "Components/StaticMeshComponent.h"
 
@@ -44,7 +43,7 @@ void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 	// ...
 }
 
-void UTankAimingComponent::AimAt(FVector HitLocation,float LaunchSpeed)
+void UTankAimingComponent::AimAt(FVector HitLocation)
 {
 	if (!Barrel) return;
 	FVector OutLaunchVelocity;
@@ -79,7 +78,7 @@ void UTankAimingComponent::MoveBarrel(FVector AimDirection) {
 	Turret->Rotate(DeltaRotator.Yaw);
 }
 
-void UTankAimingComponent::Fire(TSubclassOf<AProjectile> ProjectileBlueprint, float LaunchSpeed) {
+void UTankAimingComponent::Fire() {
 	bool isReloaded = (FPlatformTime::Seconds() - LastFiredTime) > TimeToReload;
 	if (ensure(Barrel)) {
 		if (isReloaded) {

@@ -24,22 +24,30 @@ class BATTLETANK_API UTankAimingComponent : public UActorComponent
 public:	
 	// Sets default values for this component's properties
 	UTankAimingComponent();
-	void AimAt(FVector HitLocation,float LaunchSpeed);
+	void AimAt(FVector HitLocation);
+
 	void SetBarrelReference(UTankBarrel* BarrelToSet);
+
 	void SetTurretReference(UTankTurret* TurretToSet);
+
 	UFUNCTION(BlueprintCallable)
 	void Initialize(UTankBarrel* BarrelToSet,UTankTurret* TurretToSet);
+
 	UFUNCTION(BlueprintCallable)
-	void Fire(TSubclassOf<AProjectile> ProjectileBlueprint, float LaunchSpeed);
+	void Fire();
+
 	UPROPERTY(EditDefaultsOnly, Category = Setup)
 	TSubclassOf<AProjectile> ProjectileBlueprint;
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
+
 	UPROPERTY(BlueprintReadOnly, Category = "State")
 	EFiringState FiringState = EFiringState::Locked;
+
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float LaunchSpeed = 4500;
+
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")	
 	double TimeToReload = 3;
 	double LastFiredTime = 0;

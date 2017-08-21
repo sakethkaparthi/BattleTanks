@@ -22,7 +22,6 @@ void UTankMovementComponent::IntendTurnRight(float Throw) {
 }
 
 void UTankMovementComponent::RequestDirectMove(const FVector &MoveVelocity, bool bForceMaxSpeed) {
-	UE_LOG(LogTemp, Warning, TEXT("%s Request Direct move"), *GetOwner()->GetName());
 	auto TankForward = GetOwner()->GetActorForwardVector().GetSafeNormal();
 	auto AIForwardIntention = MoveVelocity.GetSafeNormal();
 	//How much to move along the local x axis to be parallel to the player tank 

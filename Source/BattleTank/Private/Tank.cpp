@@ -2,7 +2,6 @@
 
 #include "Tank.h"
 #include "Engine/World.h"
-#include "TankBarrel.h"
 
 // Sets default values
 ATank::ATank()
@@ -20,15 +19,4 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void ATank::BeginPlay() {
 	Super::BeginPlay();
-	TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
-}
-
-void ATank::AimAt(FVector HitLocation) {
-	if(ensure(TankAimingComponent))
-		TankAimingComponent->AimAt(HitLocation,LaunchSpeed);
-}
-
-void ATank::Fire() {
-	if (ensure(TankAimingComponent))
-		TankAimingComponent->Fire(ProjectileBlueprint,LaunchSpeed);
 }
