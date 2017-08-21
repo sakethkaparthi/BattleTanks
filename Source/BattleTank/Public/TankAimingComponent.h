@@ -6,6 +6,7 @@
 #include "Components/ActorComponent.h"
 #include "TankBarrel.h"
 #include "TankTurret.h"
+#include "Projectile.h"
 #include "TankAimingComponent.generated.h"
 UENUM()
 enum class EFiringState : uint8
@@ -26,11 +27,22 @@ public:
 	void AimAt(FVector HitLocation,float LaunchSpeed);
 	void SetBarrelReference(UTankBarrel* BarrelToSet);
 	void SetTurretReference(UTankTurret* TurretToSet);
+	UFUNCTION(BlueprintCallable)
+	void Initialize(UTankBarrel* BarrelToSet,UTankTurret* TurretToSet);
+	UFUNCTION(BlueprintCallable)
+	void Fire(TSubclassOf<AProjectile> ProjectileBlueprint, float LaunchSpeed);
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
+	TSubclassOf<AProjectile> ProjectileBlueprint;
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 	UPROPERTY(BlueprintReadOnly, Category = "State")
-	EFiringState FiringState = EFiringState::Reloading;
+	EFiringState FiringState = EFiringState::Locked;
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	float LaunchSpeed = 4500;
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")	
+	double TimeToReload = 3;
+	double LastFiredTime = 0;
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;

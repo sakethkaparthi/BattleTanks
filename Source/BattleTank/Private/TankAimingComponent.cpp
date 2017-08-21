@@ -22,6 +22,12 @@ void UTankAimingComponent::SetTurretReference(UTankTurret* TurretToSet) {
 	Turret = TurretToSet;
 }
 
+void UTankAimingComponent::Initialize(UTankBarrel * BarrelToSet, UTankTurret * TurretToSet)
+{
+	Barrel = BarrelToSet;
+	Turret = TurretToSet;
+}
+
 // Called when the game starts
 void UTankAimingComponent::BeginPlay()
 {
@@ -65,9 +71,26 @@ void UTankAimingComponent::AimAt(FVector HitLocation,float LaunchSpeed)
 	}
 }
 void UTankAimingComponent::MoveBarrel(FVector AimDirection) {
+	if (!ensure(Barrel && Turret)) { return; }
 	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
 	auto AimAsRotator = AimDirection.Rotation();
 	auto DeltaRotator = AimAsRotator - BarrelRotator;
 	Barrel->Elevate(DeltaRotator.Pitch);
 	Turret->Rotate(DeltaRotator.Yaw);
+}
+
+void UTankAimingComponent::Fire(TSubclassOf<AProjectile> ProjectileBlueprint, float LaunchSpeed) {
+	bool isReloaded = (FPlatformTime::Seconds() - LastFiredTime) > TimeToReload;
+	if (ensure(Barrel)) {
+		if (isReloaded) {
+			auto Projectile = GetWorld()->SpawnActor<AProjectile>(
+				ProjectileBlueprint,
+				Barrel->GetSocketLocation(FName("Projectile")),
+				Barrel->GetSocketRotation(FName("Projectile"))
+				);
+
+			Projectile->LaunchProjectile(LaunchSpeed);
+			LastFiredTime = FPlatformTime::Seconds();
+		}
+	}
 }

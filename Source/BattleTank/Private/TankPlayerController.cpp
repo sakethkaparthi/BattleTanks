@@ -12,11 +12,13 @@ ATank* ATankPlayerController::GetControlledTank() const {
 void ATankPlayerController::BeginPlay() {
 	Super::BeginPlay();
 	auto ControlledTank= GetControlledTank();
-	if (!ControlledTank) 
-		UE_LOG(LogTemp, Error, TEXT("Tank not possessed"))
-	else
-		UE_LOG(LogTemp,Warning,TEXT("Hello from Player Controller begin play"))
-	UE_LOG(LogTemp, Warning, TEXT("Hello from %s pawn"),*ControlledTank->GetName())
+	auto AimingComponent = ControlledTank->FindComponentByClass<UTankAimingComponent>();
+	if (ensure(AimingComponent)) {
+		FoundAimingComponent(AimingComponent);
+	}
+	else {
+		UE_LOG(LogTemp, Warning, TEXT("Player controller cant find Aiming Component at begin play"))
+	}
 }
 
 void ATankPlayerController::Tick(float DeltaTime) {
