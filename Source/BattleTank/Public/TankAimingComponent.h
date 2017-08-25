@@ -13,9 +13,9 @@ enum class EFiringState : uint8
 {
 	Reloading,
 	Aiming,
-	Locked
+	Locked,
+	OutOfAmmo
 };
-
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BATTLETANK_API UTankAimingComponent : public UActorComponent
 {
@@ -40,6 +40,10 @@ public:
 	TSubclassOf<AProjectile> ProjectileBlueprint;
 
 	EFiringState GetFiringState();
+
+	UFUNCTION(BlueprintCallable)
+	int GetRoundsLeft();
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
@@ -65,4 +69,6 @@ private:
 	void MoveBarrel(FVector);
 
 	FVector AimDirection;
+
+	int RoundsLeft = 3;
 };
