@@ -34,6 +34,9 @@ public:
 	void Initialize(UTankBarrel* BarrelToSet,UTankTurret* TurretToSet);
 
 	UFUNCTION(BlueprintCallable)
+	void Initialize(UStaticMeshComponent* BarrelToSet, UStaticMeshComponent* TurretToSet);
+
+	UFUNCTION(BlueprintCallable)
 	void Fire();
 
 	UPROPERTY(EditDefaultsOnly, Category = Setup)
@@ -65,7 +68,7 @@ public:
 
 private:
 	UTankBarrel* Barrel = nullptr;
-	UTankTurret* Turret= nullptr;
+	UTankTurret* Turret = nullptr;
 	void MoveBarrel(FVector);
 
 	FVector AimDirection;
