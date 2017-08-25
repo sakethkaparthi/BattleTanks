@@ -44,7 +44,7 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector & HitResultOut) const
 		return GetLookVectorHitLocation(WorldDirection,HitResultOut);
 	}
 		
-	return true;
+	return false;
 }
 
 bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection,FVector &HitLocation) const{

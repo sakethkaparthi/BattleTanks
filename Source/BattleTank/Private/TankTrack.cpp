@@ -24,7 +24,6 @@ void UTankTrack::ApplySidewaysForce()
 
 void UTankTrack::OnHit(UPrimitiveComponent * HitComponent, AActor * OtherActor, UPrimitiveComponent * OtherComponent, FVector NormalImpulse, const FHitResult & Hit)
 {
-	UE_LOG(LogTemp,Warning, TEXT("Its hitting the insides"))
 	DriveTrack();
 	ApplySidewaysForce();
 	CurrentThrottle = 0;
@@ -32,7 +31,6 @@ void UTankTrack::OnHit(UPrimitiveComponent * HitComponent, AActor * OtherActor, 
 
 void UTankTrack::SetThrottle(float Throttle) {
 	CurrentThrottle = FMath::Clamp<float>(CurrentThrottle + Throttle, -1, 1);
-	UE_LOG(LogTemp, Warning, TEXT("%f"),CurrentThrottle)
 }
 void UTankTrack::DriveTrack() {
 	auto ForceApplied = GetForwardVector() * MaxForcePerTrack * CurrentThrottle;//Vector of force to apply
