@@ -34,9 +34,6 @@ public:
 	void Initialize(UTankBarrel* BarrelToSet,UTankTurret* TurretToSet);
 
 	UFUNCTION(BlueprintCallable)
-	void Initialize(UStaticMeshComponent* BarrelToSet, UStaticMeshComponent* TurretToSet);
-
-	UFUNCTION(BlueprintCallable)
 	void Fire();
 
 	UPROPERTY(EditDefaultsOnly, Category = Setup)
@@ -59,6 +56,10 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")	
 	double TimeToReload = 3;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	int RoundsLeft = 3;
+
 	double LastFiredTime = 0;
 public:	
 	// Called every frame
@@ -73,5 +74,4 @@ private:
 
 	FVector AimDirection;
 
-	int RoundsLeft = 3;
 };

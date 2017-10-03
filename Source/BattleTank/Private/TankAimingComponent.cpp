@@ -35,6 +35,7 @@ void UTankAimingComponent::BeginPlay()
 void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	UE_LOG(LogTemp, Warning, TEXT("Ticking"))
 	if (RoundsLeft <= 0)
 		FiringState = EFiringState::OutOfAmmo;
 	else if ((FPlatformTime::Seconds() - LastFiredTime) < TimeToReload)
@@ -94,7 +95,7 @@ EFiringState UTankAimingComponent::GetFiringState() {
 	return FiringState;
 }
 
-int UTankAimingComponent::GetRoundsLeft()
+int32 UTankAimingComponent::GetRoundsLeft()
 {
 	return RoundsLeft;
 }
